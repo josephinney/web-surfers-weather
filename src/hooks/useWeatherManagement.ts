@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useWeatherStore } from '@/store/weatherStore';
 import weatherService from '@/services/weatherService';
-import toast from 'react-hot-toast';
+
 
 export const useWeatherManagement = () => {
 
@@ -26,7 +26,6 @@ export const useWeatherManagement = () => {
 
         onError: (error) => {
             console.error("Location search failed:", error)
-            toast.error("We couldn't find locations")
             store.setError("We couldn't find locations")
         }
     });
@@ -44,12 +43,10 @@ export const useWeatherManagement = () => {
 
         onSuccess: (data) => {
             store.setWeatherData(data)
-            toast.success("Weather data fetched succesfully")
         },
 
         onError: (error) => {
             console.error("Weather fetch failed:", error)
-            toast.error("We couldn't fetch weather data")
             store.setError("We couldn't fetch weather data")
         }
 

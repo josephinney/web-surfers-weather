@@ -12,7 +12,7 @@ const WeatherService = {
         try {
             const response = await geoApiClient.get<GeoSearchResponse>('search', {
                 params: {
-                    name, 
+                    name,
                     count: 5,
                     language: 'en',
                     format: 'json'
@@ -36,9 +36,9 @@ const WeatherService = {
             const params = {
                 latitude,
                 longitude,
-                current: "temperature_2m, weather_code,wind_speed_10m, is_day",
-                daily: "weather_code, temperature_2m_max, temperature_2m_min",
-                timezone: "auto" 
+                current: "temperature_2m,weather_code,wind_speed_10m,is_day,apparent_temperature,relative_humidity_2m,uv_index",
+                daily: "weather_code,temperature_2m_max,temperature_2m_min,uv_index_max",
+                timezone: 'auto',
             }
 
             const url = "https://api.open-meteo.com/v1/forecast";
@@ -48,20 +48,23 @@ const WeatherService = {
             const response = responses[0]
 
             const utcOffsetSeconds = response.utcOffsetSeconds()
-            
+
             const current = response.current()!
-            
+
             const daily = response.daily()!
 
             const transformedData: WeatherData = {
-                
+
                 current: {
                     temperature: current.variables(0)?.value() ?? 0,
                     weathercode: current.variables(1)?.value() ?? 0,
                     windspeed: current.variables(2)?.value() ?? 0,
                     is_day: current.variables(3)?.value() ?? 0,
+                    apparent_temperature: current.variables(4)?.value() ?? 0,
+                    humidity: current.variables(5)?.value() ?? 0,
+                    uv_index: current.variables(6)?.value() ?? 0,
                 },
-                
+
                 daily: {
                     time: range(Number(daily.time()), Number(daily.timeEnd()), daily.interval()).map(
                         (t: number) => new Date((t + utcOffsetSeconds) * 1000).toISOString()
@@ -69,6 +72,7 @@ const WeatherService = {
                     weathercode: Array.from(daily.variables(0)?.valuesArray() ?? []),
                     temperature_2m_max: Array.from(daily.variables(1)?.valuesArray() ?? []),
                     temperature_2m_min: Array.from(daily.variables(2)?.valuesArray() ?? []),
+                    uv_index_max: Array.from(daily.variables(3)?.valuesArray() ?? []),
                 }
             };
 

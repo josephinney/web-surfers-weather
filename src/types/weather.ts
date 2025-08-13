@@ -14,6 +14,9 @@ export interface WeatherData {
         weathercode: number;
         windspeed: number;
         is_day: number;
+        apparent_temperature: number; 
+        humidity: number;             
+        uv_index: number;
     },
 
     daily: {
@@ -21,6 +24,7 @@ export interface WeatherData {
         weathercode: number[];
         temperature_2m_max: number[];
         temperature_2m_min: number[];
+        uv_index_max: number[];
     }
 }
 
