@@ -22,7 +22,7 @@ export default function Home() {
 
         <div className="w-full max-w-2xl text-center mb-10 md:mb-12">
           <p className="text-xl text-white max-w-lg mx-auto">
-            Your essential surf forecast for Germany's top spots.
+            Your essential surf forecast for Germany top spots.
           </p>
         </div>
 
