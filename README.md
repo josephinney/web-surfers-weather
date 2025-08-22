@@ -12,14 +12,14 @@ A simple weather application built with Next.js and TypeScript that provides rea
 - TypeScript for type safety
 - Clean component architecture
 
-## 🛠 Tech Stack
+## Tech Stack
 - **Next.js** - React framework with App Router
 - **TypeScript** - Type safety and better developer experience
 - **Tailwind CSS** - Utility-first styling
 - **Weather API** - Real-time weather data
 - **Vercel** - Deployment and hosting
 
-## 📁 Project Structure
+## Project Structure
 ```
 ├── app/           # Next.js App Router pages
 ├── components/    # Reusable UI components
@@ -29,7 +29,7 @@ A simple weather application built with Next.js and TypeScript that provides rea
 └── store/         # State management
 ```
 
-## 🔧 Getting Started
+## Getting Started
 
 First, run the development server:
 
